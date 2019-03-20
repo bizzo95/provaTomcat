@@ -12,7 +12,7 @@
 <p>Opciones:</p>
 <ul>
 <li><a href="listar">Listar</a></li>
-<li><a href="insertar?palabra=davide">Insertar Davide</a></li>
+<li><a href="insertar?palabra=davide">Insertar sDavide</a></li>
 </ul>
 </body>
 </html>
