@@ -9,7 +9,7 @@
 <body>
 <h1>Ejemplo de Proyecto de ASR con Cloudant ahora con DevOps</h1>
 <hr />
-<p>Opciones disponible por todos: </p>
+<p>Opciones disponible por todos:  </p>
 <ul>
 <li><a href="listar">Listar</a></li>
 <li><a href="insertar?palabra=davide">Insertar Davide</a></li>
