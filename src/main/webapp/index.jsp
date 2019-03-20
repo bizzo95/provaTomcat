@@ -9,7 +9,7 @@
 <body>
 <h1>Ejemplo de Proyecto de ASR con Cloudant ahora con DevOps</h1>
 <hr />
-<p>Opciones de la clase de ASR de Davide Bizzini:</p>
+<p>Opciones:</p>
 <ul>
 <li><a href="listar">Listar</a></li>
 <li><a href="insertar?palabra=davide">Insertar davide</a></li>
