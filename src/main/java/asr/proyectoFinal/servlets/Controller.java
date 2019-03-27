@@ -47,6 +47,7 @@ public class Controller extends HttpServlet {
 			case "/insertar":
 				Palabra palabra = new Palabra();
 				String parametro = request.getParameter("palabra");
+				String psw = request.getParameter("password");
 
 				if(parametro==null)
 				{
@@ -61,8 +62,9 @@ public class Controller extends HttpServlet {
 					else
 					{
 						palabra.setName(parametro);
+						palabra.setPassword(psw);
 						store.persist(palabra);
-					    out.println(String.format("Almacenada la palabra: %s", palabra.getName()));			    	  
+					    out.println(String.format("Almacenada la palabra: %s", palabra.getName(), " ", palabra.getPassword()));			    	  
 					}
 				}
 				break;
