@@ -47,7 +47,7 @@ public class Controller extends HttpServlet {
 				if(store.getDB() == null)
 					  out.println("No hay DB");
 				else
-					out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
+					out.println("Las Palabras en la BD Cloudant:<br />" + store.getAll());
 				
 				
 				LanguageTranslator service = new LanguageTranslator("hello");
@@ -57,13 +57,13 @@ public class Controller extends HttpServlet {
 				service.setIamCredentials(iamOptions);
 
 				TranslateOptions translateOptions = new TranslateOptions.Builder()
-				  .addText("hello")
+				  .addText("dog")
 				  .source(Language.ENGLISH)
 				  .target(Language.SPANISH)
 				  .build();
 				TranslationResult translationResult = service.translate(translateOptions).execute();
 
-				System.out.println(translationResult);
+				out.println("<h1> RISULTATO</h1>" + translationResult);
 				
 				
 				
