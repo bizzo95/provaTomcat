@@ -83,6 +83,10 @@ public class CloudantPalabraStore
 		} catch (IOException e) {
 			return null;
 		}
+		String ciao = docs.toString();
+		Palabra parola = new Palabra();
+		parola = docs.get(1);
+		System.out.println(parola);
         return docs;
 	}
 

@@ -18,6 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
+import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
+import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
+import com.ibm.watson.developer_cloud.language_translator.v3.util.Language;
+import com.ibm.watson.developer_cloud.service.security.IamOptions;
+
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
 
@@ -42,6 +48,25 @@ public class Controller extends HttpServlet {
 					  out.println("No hay DB");
 				else
 					out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
+				
+				
+				LanguageTranslator service = new LanguageTranslator("hello");
+				IamOptions iamOptions = new IamOptions.Builder()
+				  .apiKey("<iam_api_key>")
+				  .build();
+				service.setIamCredentials(iamOptions);
+
+				TranslateOptions translateOptions = new TranslateOptions.Builder()
+				  .addText("hello")
+				  .source(Language.ENGLISH)
+				  .target(Language.SPANISH)
+				  .build();
+				TranslationResult translationResult = service.translate(translateOptions).execute();
+
+				System.out.println(translationResult);
+				
+				
+				
 				break;
 				
 			case "/insertar":

@@ -12,7 +12,7 @@
 <p>Opciones disponible por todos:  </p>
 <ul>
 <li><a href="listar">Listar</a></li>
-<li><a href="insertar?palabra=davide&password=bizzini">Insertar Davide Bizzini</a></li>
+<li><a href="insertar?palabra=davide&password=bizzini">Insertar Davide Bizzini </a></li>
 </ul>
 </body>
 </html>
