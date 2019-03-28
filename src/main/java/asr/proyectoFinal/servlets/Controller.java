@@ -47,10 +47,11 @@ public class Controller extends HttpServlet {
 				if(store.getDB() == null)
 					  out.println("No hay DB");
 				else
-					out.println("Las Palabras en la BD Cloudant:<br />" + store.getAll());
+					out.println("Las Palabras en la BD Cloudant: :))<br />" + store.getAll());
 				
 				
-				LanguageTranslator service = new LanguageTranslator("hello");
+				LanguageTranslator service = new LanguageTranslator("23-03-2018");
+				service.setUsernameAndPassword("4q0_p1C2cXn-LZLGYaA1xYC8jbwAiWMgBtu71PuOnxA4", "https://gateway-lon.watsonplatform.net/language-translator/api");
 				IamOptions iamOptions = new IamOptions.Builder()
 				  .apiKey("<iam_api_key>")
 				  .build();
