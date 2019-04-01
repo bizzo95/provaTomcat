@@ -9,4 +9,4 @@ applications:
   domain: eu-gb.mybluemix.net
   services:
   - asrDCBCloudantNoSQL
-  -	Language Translator-asr
+  - Language Translator-asr
