@@ -59,7 +59,7 @@ public class Controller extends HttpServlet {
 					//out.println("Las Palabras en la BD Cloudant ;): <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
 				
 				
-				/*LanguageTranslator service = new LanguageTranslator("23-03-2018");
+				LanguageTranslator service = new LanguageTranslator("23-03-2018");
 				service.setUsernameAndPassword("user","password");
 				service.setEndPoint("https://gateway-lon.watsonplatform.net/assistant/api");
 				IamOptions iamOptions = new IamOptions.Builder()
@@ -75,7 +75,7 @@ public class Controller extends HttpServlet {
 				TranslationResult translationResult = service.translate(translateOptions).execute();
 
 				out.println("<h1> RISULTATO</h1>" + translationResult);
-				*/
+				
 				
 				
 				break;
