@@ -23,6 +23,9 @@ import java.util.List;
 import com.cloudant.client.api.ClientBuilder;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
+import com.cloudant.client.api.query.QueryBuilder;
+import com.cloudant.client.api.query.QueryResult;
+import com.cloudant.client.api.query.Sort;
 import com.google.gson.JsonObject;
 
 import asr.proyectoFinal.dominio.Palabra;
@@ -76,20 +79,47 @@ public class CloudantPalabraStore
 		}
 	}
 	
-	public Collection<Palabra> getAll(){
+	public boolean getAll(String name, String psw){		
         List<Palabra> docs;
+        boolean trovato = false;
 		try {
 			docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Palabra.class);
 		} catch (IOException e) {
-			return null;
+			return trovato;
 		}
-		String ciao = docs.toString();
-		Palabra parola = new Palabra();
-		parola = docs.get(1);
-		System.out.println(parola);
-        return docs;
+		int i = 0;
+		while (i<=docs.size()-1 && !trovato) {
+			Palabra parola = new Palabra();
+			parola = docs.get(i);
+			if (parola.getName().equals(name) && parola.getPassword().equals(psw)) {
+				System.out.println("accesso consentito " + parola.getName() + " " + parola.getPassword());
+				trovato = true;
+			}
+			i++;
+		}
+        return trovato;
 	}
-
+	
+	public boolean ckeckExisting(String name){		
+        List<Palabra> docs;
+        boolean trovato = false;
+		try {
+			docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Palabra.class);
+		} catch (IOException e) {
+			return trovato;
+		}
+		int i = 0;
+		while (i<=docs.size()-1 && !trovato) {
+			Palabra parola = new Palabra();
+			parola = docs.get(i);
+			if (parola.getName().equals(name)) {
+				System.out.println("Username già esistente");
+				trovato = true;
+			}
+			i++;
+		}
+        return trovato;
+	}
 	
 	public Palabra get(String id) {
 		return db.find(Palabra.class, id);
@@ -115,8 +145,8 @@ public class CloudantPalabraStore
 		
 	}
 
-	public int count() throws Exception {
-		return getAll().size();
-	}
+	/*public int count() throws Exception {
+		return getAll("davide", "bizzini").size();
+	}*/
 
 }

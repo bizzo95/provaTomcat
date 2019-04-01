@@ -22,7 +22,10 @@ import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
 import com.ibm.watson.developer_cloud.language_translator.v3.util.Language;
+import com.ibm.watson.developer_cloud.service.exception.NotFoundException;
 import com.ibm.watson.developer_cloud.service.security.IamOptions;
+import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions.Builder;
+
 
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
@@ -47,13 +50,20 @@ public class Controller extends HttpServlet {
 				if(store.getDB() == null)
 					  out.println("No hay DB");
 				else
-					out.println("Las Palabras en la BD Cloudant: :))<br />" + store.getAll());
+					if (store.getAll(request.getParameter("username"), request.getParameter("password"))) {
+						out.println("Accesso consentito");
+					} 
+					else {
+						response.sendRedirect("/asrTomcatEjemploCloudant?e");
+					}
+					//out.println("Las Palabras en la BD Cloudant ;): <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
 				
 				
-				LanguageTranslator service = new LanguageTranslator("23-03-2018");
-				//service.setUsernameAndPassword("4q0_p1C2cXn-LZLGYaA1xYC8jbwAiWMgBtu71PuOnxA4", "https://gateway-lon.watsonplatform.net/language-translator/api");
+				/*LanguageTranslator service = new LanguageTranslator("23-03-2018");
+				service.setUsernameAndPassword("user","password");
+				service.setEndPoint("https://gateway-lon.watsonplatform.net/assistant/api");
 				IamOptions iamOptions = new IamOptions.Builder()
-				  .apiKey("<iam_api_key>")
+				  .apiKey("o1pXiTW5Roc878T6X7f2Y5SKa1trWLc2ZhlhKe-uGzfA")
 				  .build();
 				service.setIamCredentials(iamOptions);
 
@@ -65,14 +75,14 @@ public class Controller extends HttpServlet {
 				TranslationResult translationResult = service.translate(translateOptions).execute();
 
 				out.println("<h1> RISULTATO</h1>" + translationResult);
-				
+				*/
 				
 				
 				break;
 				
 			case "/insertar":
 				Palabra palabra = new Palabra();
-				String parametro = request.getParameter("palabra");
+				String parametro = request.getParameter("username");
 				String psw = request.getParameter("password");
 
 				if(parametro==null)
@@ -89,8 +99,13 @@ public class Controller extends HttpServlet {
 					{
 						palabra.setName(parametro);
 						palabra.setPassword(psw);
-						store.persist(palabra);
-					    out.println(String.format("Almacenada la palabra: %s", palabra.getName(), " ", palabra.getPassword()));			    	  
+						if (!store.ckeckExisting(parametro)) {
+							out.println(String.format("Utente registrato: %s", palabra.getName()));
+							store.persist(palabra);
+						}			    	  
+						else {
+							out.println("Utente esistente");
+						}
 					}
 				}
 				break;
