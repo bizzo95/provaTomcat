@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.cloud.sdk.core.http.Response;
+/*import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.service.security.IamOptions;
 import com.ibm.watson.language_translator.v3.LanguageTranslator;
 import com.ibm.watson.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.language_translator.v3.model.TranslationResult;
 import com.ibm.watson.language_translator.v3.util.Language;
-
+*/
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
 
@@ -57,7 +57,7 @@ public class Controller extends HttpServlet {
 					//out.println("Las Palabras en la BD Cloudant ;):  <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
 				
 				out.println("Oila");
-				LanguageTranslator service = new LanguageTranslator("23-03-2018");
+				/*LanguageTranslator service = new LanguageTranslator("23-03-2018");
 				service.setUsernameAndPassword("user","password");
 				service.setEndPoint("https://gateway-lon.watsonplatform.net/assistant/api");
 				IamOptions iamOptions = new IamOptions.Builder()
@@ -73,7 +73,7 @@ public class Controller extends HttpServlet {
 				Response<TranslationResult> translationResult = service.translate(translateOptions).execute();
 
 				out.println("<h1> RISULTATO</h1>" + translationResult);
-				
+				*/
 				
 				
 				break;
