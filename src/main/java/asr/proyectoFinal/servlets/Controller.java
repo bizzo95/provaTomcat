@@ -18,14 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
-import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
-import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
-import com.ibm.watson.developer_cloud.language_translator.v3.util.Language;
-import com.ibm.watson.developer_cloud.service.exception.NotFoundException;
-import com.ibm.watson.developer_cloud.service.security.IamOptions;
-import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions.Builder;
-
+import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.service.security.IamOptions;
+import com.ibm.watson.language_translator.v3.LanguageTranslator;
+import com.ibm.watson.language_translator.v3.model.TranslateOptions;
+import com.ibm.watson.language_translator.v3.model.TranslationResult;
+import com.ibm.watson.language_translator.v3.util.Language;
 
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
@@ -51,14 +49,14 @@ public class Controller extends HttpServlet {
 					  out.println("No hay DB");
 				else
 					if (store.getAll(request.getParameter("username"), request.getParameter("password"))) {
-						out.println("Accesso consentito");
+						out.println("Accesso consentito a");
 					} 
 					else {
 						response.sendRedirect("/asrTomcatEjemploCloudant?e");
 					}
-					//out.println("Las Palabras en la BD Cloudant ;): <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
+					//out.println("Las Palabras en la BD Cloudant ;):  <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
 				
-				
+				out.println("Oila");
 				LanguageTranslator service = new LanguageTranslator("23-03-2018");
 				service.setUsernameAndPassword("user","password");
 				service.setEndPoint("https://gateway-lon.watsonplatform.net/assistant/api");
@@ -72,7 +70,7 @@ public class Controller extends HttpServlet {
 				  .source(Language.ENGLISH)
 				  .target(Language.SPANISH)
 				  .build();
-				TranslationResult translationResult = service.translate(translateOptions).execute();
+				Response<TranslationResult> translationResult = service.translate(translateOptions).execute();
 
 				out.println("<h1> RISULTATO</h1>" + translationResult);
 				
