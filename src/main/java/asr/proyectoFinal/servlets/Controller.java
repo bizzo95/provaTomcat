@@ -116,8 +116,10 @@ public class Controller extends HttpServlet {
 				    in.close();
 				} catch (IOException ioe) {
 					System.out.println("IOException" + ioe);
+					out.println("IOException" + ioe);
 				}
 				content = contentBuilder.toString();
+				out.println("ecco content " + content);
 				
 				
 				
@@ -141,7 +143,9 @@ public class Controller extends HttpServlet {
 				    in2.close();
 				} catch (IOException ioe) {
 					System.out.println("IOException" + ioe);
+					out.println("IOException" + ioe);
 				}
+				out.println("ecco content2 " + content2);
 				content2 = contentBuilder2.toString();
 				
 				String pagehtml = content + content2;

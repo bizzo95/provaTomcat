@@ -11,19 +11,19 @@
 <hr />
 <ul>
 <p><h1>Sign in: </h1></p>
-<form action="listar" method="POST">
-<li>Inserire username: <input type="text" name="username">
-<li>Inserire password: <input type="password" name="password">
-<input type="submit" value="Invia">
+	<form action="listar" method="POST">
+	<li>Inserire username: <input type="text" name="username">
+	<li>Inserire password: <input type="password" name="password">
+	<input type="submit" value="Invia">
 </form> 
 <br><br><br>
 <p><h1>Sign up: </h1></p>
 <form action="insertar" method="POST" id="form">
-<li>Inserire username: <input type="text" name="username" id="usr" class="inp">
-<li>Inserire password: <input type="password" name="password" id="psw" class="inp">
-<li>Reinserire password: <input type="password" name="password2" id="psw2" class="inp">
-<input type="submit" value="Invia" id="invia" >
-<p id="p"></p>
+	<li>Inserire username: <input type="text" name="username" id="usr" class="inp">
+	<li>Inserire password: <input type="password" name="password" id="psw" class="inp">
+	<li>Reinserire password: <input type="password" name="password2" id="psw2" class="inp">
+	<input type="submit" value="Invia" id="invia" >
+	<p id="p"></p>
 </form>
  
 </ul>
