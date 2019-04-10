@@ -81,7 +81,7 @@ public class Controller extends HttpServlet {
 				servicePI.setEndPoint("https://gateway-lon.watsonplatform.net/personality-insights/api");
 
 				// Demo content from Moby Dick by Hermann Melville (Chapter 1)
-				String text = "Call me Ishmael. Some years ago-never mind how long precisely-having "
+				String text = "Call me Ishmael please. Some years ago-never mind how long precisely-having "
 					    + "little or no money in my purse, and nothing particular to interest me on shore, "
 					    + "I thought I would sail about a little and see the watery part of the world. "
 					    + "It is a way I have of driving off the spleen and regulating the circulation. "
