@@ -93,7 +93,7 @@ $(document).ready(function(){
 		 }
 		 else {
 			 $(this).attr("disabled", true);
-			 $("#p").text("Compila tutti i campi correttamente!");
+			 $("#p").text("Compila tutti i campi correttamente! ");
 		 }
 	  });  
 	  
