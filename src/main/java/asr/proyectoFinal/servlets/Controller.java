@@ -119,7 +119,6 @@ public class Controller extends HttpServlet {
 					out.println("IOException" + ioe);
 				}
 				content = contentBuilder.toString();
-				out.println("ecco content " + content);
 				
 				
 				
@@ -145,13 +144,17 @@ public class Controller extends HttpServlet {
 					System.out.println("IOException" + ioe);
 					out.println("IOException" + ioe);
 				}
-				out.println("ecco content2 " + content2);
 				content2 = contentBuilder2.toString();
 				
-				String pagehtml = content + content2;
+				//String pagehtml = content + content2;
 				
 				System.out.println("stampo " + content2);
-				out.println(pagehtml);
+				//out.println(pagehtml);
+				out.println("<html><body><form action='hablar' method='POST'>"
+				+"<li>Inserire username: <input type='text' name='username'>"
+				+"<li>Inserire password: <input type='password' name='password'>"
+				+"<input type='submit' value='Invialo'>"
+				+"</form>");
 				
 			/////////////////////////////////////////////	
 				
@@ -227,12 +230,24 @@ public class Controller extends HttpServlet {
 							store.persist(palabra);
 						}			    	  
 						else {
-							out.println("Utente esistente");
+							response.sendRedirect("/asrTomcatEjemploCloudant?u");
 						}
 					}
 				}
 				break;
+				
+			case "/hablar":
+				System.out.println("ciao");
+				out.println("ciao");
+				break;
+				
+				
+				
 		}
+		
+		
+		
+		
 		out.println("</body></html>");
 	}
 
