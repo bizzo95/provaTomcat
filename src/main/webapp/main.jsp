@@ -45,23 +45,23 @@
 				  <option value="fr">Francese</option>
 				</select>
 			</div>
-			<button class="btn btn-info" id="traduci" name="action" value="trad">Traduci</button>
+			<button class="btn btn-info" id="traduci" name="action" value="1">Traduci</button>
     </div>
     <div class="col-sm-3">
       <h5>Analisi sentimenti</h5>
       Effettua l'analisi del Big5, analizzando il testo sulle 5 dimensioni della personalità. Sono necessarie almeno <u>100 parole</u>.
-      <button class="btn btn-warning" id="traduci" name="action" value="sent">Analisi Big5</button>
+      <button class="btn btn-warning" id="traduci" name="action" value="2">Analisi Big5</button>
     </div>
     <div class="col-sm-3">
       Pollac
-      <button class="btn btn-primary" id="traduci" name="action" value="und">Analisi Keywords</button>
+      <button class="btn btn-primary" id="traduci" name="action" value="3">Analisi Keywords</button>
     </div>
 	<div class="col-sm-3">
 	<h5>Scarica l'audio</h5>
 	Inserisci il nome del tuo file di testo e con un click troverai il tuo testo in formato audio sul tuo Desktop.
 	  <label>Nome file:</label>
       <input type="text" name="name" class="form-control">
-      <button class="btn btn-light" id="traduci" name="action" value="audio">Scarica audio</button>
+      <button class="btn btn-light" id="traduci" name="action" value="4">Scarica audio</button>
     </div>
   </div>
 </div>
@@ -72,16 +72,17 @@
   <label for="comment"><h5>Risultato: </h5></label>
 <% try {
 		String param = request.getParameter("action");
+		int p = Integer.parseInt(param);
 		String text = request.getParameter("text");
-	    switch (param) {
-	  		case "trad": 
+	    switch (p) {
+	  		case 1: 
 				String source = request.getParameter("source");
 				String dest = request.getParameter("dest");
 				Traduttore tra = new Traduttore(); %>
 				<div id="ris" class="container-fluid"><%= tra.getTranslation(text, source, dest) %></div>
 				<%break;
 				
-	  		case "sent":
+	  		case 2:
 	  			Sentimento sent = new Sentimento();%>
 	  			<div id="ris" class="container-fluid">
 	  			<% 
@@ -92,7 +93,7 @@
 	  			</div>
 	  			<%break;
 	  			
-	  		case "und":
+	  		case 3:
 	  			Understanding u =new Understanding();
 	  			ArrayList<JsonArray> risultato = u.getnlu(text);%>
 	  			<p></p>
@@ -179,7 +180,7 @@
 					
 	  			<%break;
 	  		
-	  		case "audio":
+	  		case 4:
 	  			String name = request.getParameter("name");
 	  			Audio aud = new Audio();%>
 	  			<div id="ris" class="container-fluid"> Il file <%=aud.getAudio(text, name) %> è stato staricato con successo sul Desktop</div>
