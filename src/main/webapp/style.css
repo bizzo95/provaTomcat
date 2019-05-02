@@ -8,9 +8,8 @@ body {
 
 #signup {
 	width:350px;
+	display: none;
 	margin-left:20px;
-	margin-top:40px;
-	align:center;
 }
 
 .error {
@@ -24,9 +23,43 @@ body {
 }
 
 #lbl2 {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 #erroreCredErr {
 	color:red;
+}
+
+#btnSignUp {
+	margin-top: -6px;
+    margin-left: -10px;
+}
+
+#modal{
+	display: none;	
+}
+
+#jumbo{
+	margin-top:20px
+}
+
+#divRis {
+	margin-top:50px
+}
+
+#traduttore {
+	
+}
+
+#ris {
+	border-radius: 15px;
+	background-color: white;
+}
+
+#logo {
+	text-align:center;
+}
+
+#logoimg {
+	width:350px;
 }

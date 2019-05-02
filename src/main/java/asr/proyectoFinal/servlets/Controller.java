@@ -28,9 +28,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.assistant.v1.model.DialogNodeNextStep.Behavior;
 import com.ibm.watson.developer_cloud.http.HttpMediaType;
-import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
-import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
-import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
+
 import com.ibm.watson.developer_cloud.language_translator.v3.util.Language;
 import com.ibm.watson.developer_cloud.personality_insights.v3.PersonalityInsights;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
@@ -43,24 +41,40 @@ import com.ibm.watson.developer_cloud.speech_to_text.v1.model.SpeechRecognitionR
 
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
+import asr.proyectoFinal.services.Traduttore;
 
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = {"/listar", "/insertar", "/hablar"})
+@WebServlet(urlPatterns = {"/log", "/add", "/trad"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		PrintWriter out = response.getWriter();
-		//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
 		
+		//Set the HTML page
+		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtda'>"
+				+"<html>"
+				+"<head>"
+				+"<meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>"
+				+"<title>Italianos project</title>"
+				+"<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>"
+				+"<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous'></script>"
+				+"<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js' integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1' crossorigin='anonymous'></script>"
+				+"<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script>"
+				+"<link rel='stylesheet' href='style.css'>"
+				+"<link rel='shortcut icon' href='italia.png' />"
+				+"</head>"
+				+"<body>");
+		
+		//Servlet case
 		CloudantPalabraStore store = new CloudantPalabraStore();
 		System.out.println(request.getServletPath());
 		switch(request.getServletPath())
 		{
-			case "/listar":
+			case "/log":
 				
 				
 /////////////////////////////////////////////////////////////////
@@ -72,7 +86,7 @@ public class Controller extends HttpServlet {
 			
 				
 				
-				PersonalityInsights servicePI = new PersonalityInsights("2019-09-09");
+				/*PersonalityInsights servicePI = new PersonalityInsights("2019-09-09");
 				IamOptions options = new IamOptions.Builder()
 				  .apiKey("s0cAhv538Lz8jcqUUdegmrsEAzh3595XdIjeGqeLvSG-")
 				  .build();
@@ -160,95 +174,72 @@ public class Controller extends HttpServlet {
 				
 				
 				
-				LanguageTranslator service = new LanguageTranslator("2018-04-09");
-				service.setUsernameAndPassword("user","password");
-				//service.setEndPoint("https://gateway-lon.watsonplatform.net/asssistant/api");
-				service.setEndPoint("https://gateway-lon.watsonplatform.net/language-translator/api");
-				IamOptions iamOptions = new IamOptions.Builder()
-				  .apiKey("o1pXiTW5Roc878T6X7f2Y5SKa1trWLc2ZhlhKe-uGzfA")
-				  .build();
-				service.setIamCredentials(iamOptions);
-
-				TranslateOptions translateOptions = new TranslateOptions.Builder()
-				  .addText("the dog all over the table")
-				  .source(Language.ENGLISH)
-				  .target(Language.SPANISH)
-				  .build();
-				TranslationResult translationResult = service.translate(translateOptions).execute();
 				
-
-				String traduccionJSON = translationResult.toString();
-				JsonParser parser = new JsonParser();
-				JsonObject rootObj = parser.parse(traduccionJSON).getAsJsonObject();
-				JsonArray traducciones = rootObj.getAsJsonArray("translations");
-				String traduccionPrimera = "";
-				if(traducciones.size()>0) traduccionPrimera = traducciones.get(0).getAsJsonObject().get("translation").getAsString();
-				
-
-				out.println("Risultato traduzione " + traduccionPrimera);
-				
+				*/
 				////////////////////////////////////////////////////
 				
 						
 				
 				if(store.getDB() == null)
-					  out.println("No hay DB");
+					  out.println("DB non esistente");
 				else {
 					if (store.getAll(request.getParameter("username"), request.getParameter("password"))) {
-						out.println("Accesso consentito a");
+						response.sendRedirect("/asrTomcatEjemploCloudant/main.jsp");
 					} 
 					else {
-						response.sendRedirect("/asrTomcatEjemploCloudant?e");
+						response.sendRedirect("/asrTomcatEjemploCloudant/?e");
 					}
-					//out.println("Las Palabras en la BD Cloudant ;):  <br />" + store.getAll(request.getParameter("username"), request.getParameter("password")));
 				}
 				
 				
 				break;
 				
-			case "/insertar":
+			case "/add":
 				Palabra palabra = new Palabra();
 				String parametro = request.getParameter("username");
 				String psw = request.getParameter("password");
 
-				if(parametro==null)
+
+				if(store.getDB() == null) 
 				{
-					out.println("usage: /insertar?palabra=palabra_a_traducir");
+					out.println("Errore DB vuoto ");
 				}
 				else
 				{
-					if(store.getDB() == null) 
-					{
-						out.println(String.format("Palabra: %s", palabra));
-					}
-					else
-					{
-						palabra.setName(parametro);
-						palabra.setPassword(psw);
-						if (!store.ckeckExisting(parametro)) {
-							out.println(String.format("Utente registrato: %s", palabra.getName()));
-							store.persist(palabra);
-						}			    	  
-						else {
-							response.sendRedirect("/asrTomcatEjemploCloudant?u");
-						}
+					palabra.setName(parametro);
+					palabra.setPassword(psw);
+					if (!store.ckeckExisting(parametro)) {
+						out.println(String.format("Utente registrato: %s", palabra.getName()));
+						store.persist(palabra);
+						response.sendRedirect("/asrTomcatEjemploCloudant?n=" + palabra.getName());
+					}			    	  
+					else {
+						response.sendRedirect("/asrTomcatEjemploCloudant?u");
 					}
 				}
+				
 				break;
 				
-			case "/hablar":
-				System.out.println("ciao");
-				out.println("ciao");
+			/*case "/trad":
+				String text = request.getParameter("text");
+				String source = request.getParameter("source");
+				String dest = request.getParameter("dest");
+				Traduttore tra = new Traduttore();
+				String traduzione = tra.getTranslation(text, source, dest);
+				
+				out.println("Ecco la traduzione " + traduzione);
+				response.sendRedirect("/asrTomcatEjemploCloudant/main.jsp?azione=" + traduzione);
+				
 				break;
-				
-				
+			*/	
 				
 		}
 		
 		
 		
 		
-		out.println("</body></html>");
+		out.println("</body>"
+					+ "</html>");
 	}
 
 	/**

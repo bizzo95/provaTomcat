@@ -1,7 +1,7 @@
 ---
 applications:
 - name: asrTomcatEjemploCloudant
-  random-route: false
+  random-route: true
   path: target/asrTomcatEjemploCloudant.war
   memory: 640M
   instances: 1

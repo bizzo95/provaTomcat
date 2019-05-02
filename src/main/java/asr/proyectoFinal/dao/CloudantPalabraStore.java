@@ -121,32 +121,10 @@ public class CloudantPalabraStore
         return trovato;
 	}
 	
-	public Palabra get(String id) {
-		return db.find(Palabra.class, id);
-	}
-
-	
 	public Palabra persist(Palabra td) {
 		String id = db.save(td).getId();
 		return db.find(Palabra.class, id);
 	}
-
-	public Palabra update(String id, Palabra newPalabra) {
-		Palabra visitor = db.find(Palabra.class, id);
-		visitor.setName(newPalabra.getName());
-		db.update(visitor);
-		return db.find(Palabra.class, id);
-		
-	}
-
-	public void delete(String id) {
-		Palabra visitor = db.find(Palabra.class, id);
-		db.remove(id, visitor.get_rev());
-		
-	}
-
-	/*public int count() throws Exception {
-		return getAll("davide", "bizzini").size();
-	}*/
+	
 
 }
