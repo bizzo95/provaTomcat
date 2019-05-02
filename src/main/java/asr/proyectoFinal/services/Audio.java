@@ -45,20 +45,18 @@ public class Audio
 
 		// quick way to wait for synthesis to complete, since synthesizeUsingWebSocket() runs asynchronously
 
-	try {
-		Thread.sleep(7000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// create file with audio data
 		File dir = new File(".");
 		dir.mkdir();
-	//ruta dove inviare C:\\Users\\loren\\asrTomcatEjemploCloudant-master\\src\\main\\java\\asr\\proyectoFinal\\canciones
-		
-		//Date dat= new Date();
-		//String data_corr= dat.getDate()+ "/" + dat.getMonth() + "/" + dat.getYear()+"_"+dat.getHours()+"-"+dat.getMinutes()+"-"+dat.getSeconds();
+
+		if (name.equals("")) name= "default";
 		name+= ".mp3";
 		File filename = new File(dir, name);
 		OutputStream fileOutputStream = new FileOutputStream(filename);			
@@ -66,8 +64,7 @@ public class Audio
 		
 
 		// clean up
-		byteArrayOutputStream.close();
-		
+		byteArrayOutputStream.close();		
 		fileOutputStream.close();
 	
 		
