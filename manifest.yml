@@ -2,7 +2,7 @@
 applications:
 - name: TexTool
   random-route: true
-  path: target/asrTomcatEjemploCloudant.war
+  path: target/TexTool.war
   memory: 640M
   instances: 1
   host: asrTomcatEjemploCloudantNuovo
