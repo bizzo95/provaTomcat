@@ -18,7 +18,7 @@
 <body>
 
 <div id="container" class="container-fluid">
-<p>Benvenuto, ora puoi utilizzare tutti i tools a tua disposizione</p>
+<p>Benvenuto amico!, ora puoi utilizzare tutti i tools a tua disposizione</p>
 
 <form action="main.jsp" method="GET">
 <div class="form-group">
