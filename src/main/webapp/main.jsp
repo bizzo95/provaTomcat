@@ -18,12 +18,12 @@
 <body>
 
 <div id="container" class="container-fluid">
-<p>Benvenuto, ora puoi utilizzare tutti i tools a tua disposizione</p>
+<!--  <p>Benvenuto, ora puoi utilizzare tutti i tools a tua disposizione</p>-->
 
 <form action="main.jsp" method="GET">
 <div class="form-group">
-  <label for="comment"><h5>Testo:</h5></label>
-  <textarea name="text" class="form-control" rows="5" id="comment">I stand here today humbled by the task before us, grateful for the trust you have bestowed, mindful of the sacrifices borne by our ancestors. I thank President Bush for his service to our nation, as well as the generosity and cooperation he has shown throughout this transition. Forty-four Americans have now taken the presidential oath. The words have been spoken during rising tides of prosperity and the still waters of peace. Yet, every so often the oath is taken amidst gathering clouds and raging storms. At these moments, America has carried on not simply because of the skill or vision of those in high office, but because We the People have remained faithful to the ideals of our forbearers, and true to our founding documents.</textarea>
+  <label for="comment">Testo:</label>
+  <textarea name="text" class="form-control" rows="5" id="comment"></textarea>
 </div>
 
 
@@ -45,23 +45,27 @@
 				  <option value="fr">Francese</option>
 				</select>
 			</div>
-			<button class="btn btn-info" id="traduci" name="action" value="1">Traduci</button>
+			<button class="btn btn-info bottone" id="traduci" name="action" value="1">Traduci</button>
     </div>
     <div class="col-sm-3">
-      <h5>Analisi sentimenti</h5>
+      <h5>Analisi Sentimenti</h5>
       Effettua l'analisi del Big5, analizzando il testo sulle 5 dimensioni della personalità. Sono necessarie almeno <u>100 parole</u>.
-      <button class="btn btn-warning" id="traduci" name="action" value="2">Analisi Big5</button>
+      <button class="btn btn-warning bottone" id="traduci" name="action" value="2">Analisi Big5</button>
     </div>
     <div class="col-sm-3">
-      Pollac
-      <button class="btn btn-primary" id="traduci" name="action" value="3">Analisi Keywords</button>
+    	<h5>Language Understanding</h6>
+	   	Effettua l'analisi dal testo:<br>
+		- <u>Keywords</u>: restituisce parole chiave importanti nel contenuto.<br>
+		- <u>Entities</u>: identifica persone, città, organizzazioni, etc.<br>
+		- <u>Emotions</u>: fornisce una analisi dell'emozione per le entità trovate in precedenza.<br>
+		 <button class="btn btn-primary bottone" id="traduci" name="action" value="3">Understanding</button>
     </div>
 	<div class="col-sm-3">
 	<h5>Scarica l'audio</h5>
 	Inserisci il nome del tuo file di testo e con un click troverai il tuo testo in formato audio sul tuo Desktop.
 	  <label>Nome file:</label>
       <input type="text" name="name" class="form-control">
-      <button class="btn btn-light" id="traduci" name="action" value="4">Scarica audio</button>
+      <button class="btn btn-light bottone" id="traduci" name="action" value="4">Scarica audio</button>
     </div>
   </div>
 </div>
@@ -73,8 +77,14 @@
 <% try {
 		String param = request.getParameter("action");
 		int p = Integer.parseInt(param);
-		String text = request.getParameter("text");
-	    switch (p) {
+		String text = request.getParameter("text");%>
+		
+		<script>
+			$("#comment").text("<%= text %>");
+			$("#loading").css("display","block");
+		</script>
+		
+	    <%switch (p) {
 	  		case 1: 
 				String source = request.getParameter("source");
 				String dest = request.getParameter("dest");
@@ -111,8 +121,8 @@
 					<thead>
 					<tr>
 					<th scope="col"></th>
-					<th scope="col">Relevance</th>
-					<th scope="col">Final Score</th>
+					<th scope="col">Relevance [0;1]</th>
+					<th scope="col">Final Score [-1;1]</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -136,8 +146,8 @@
 					<thead>
 					<tr>
 					<th scope="col"></th>
-					<th scope="col">Relevance</th>
-					<th scope="col">Final Score</th>
+					<th scope="col">Relevance [0;1]</th>
+					<th scope="col">Final Score [-1;1]</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -185,12 +195,17 @@
 	  			Audio aud = new Audio();%>
 	  			<div id="ris" class="container-fluid"> Il file <%=aud.getAudio(text, name) %> è stato staricato con successo sul Desktop</div>
 	  			<%break;
-	  	}
-	    }catch (Exception e){}%>
+	  	}%>
+	    
+	    <script>
+			$("#loading").css("display","none");
+		</script>
+	    
+	    <%}catch (Exception e){}%>
 
 </div>
 
-
+<div id="loading"><img id="imgLoading" src="loading.gif"></div>
  
 </div>
 
@@ -199,8 +214,6 @@
 
 <script>
 $( document ).ready(function() {
-	//var query = window.location.search.substring(1).split("&")[0].split("=")[1].split("+");
-	//console.log(query);
 	
 	$("#source").change(function(){
 		if ($("#source option:selected").text() == "Inglese") {
@@ -244,6 +257,10 @@ $( document ).ready(function() {
 		$("#tab-ent").css("display","none");
 			$("#tab-key").css("display","none");
 		  $("#tab-emo").toggle();
+		});
+	
+	$(".bottone").click(function () {
+		$("#loading").css("display","block");
 		});
 	
 	
