@@ -39,7 +39,7 @@
 	<!--  Jumbotron spiegazione-->
 	<div id="jumbo" class="jumbotron">
 	  <h4 class="display-4">Buongiorno visitatore!</h4>
-	  <p class="lead">Benvenuto nel nostra webpage TexTool. Qui potrai eseguire una serie di azioni su un testo, tra cui la traduzione, analizzarlo grazie al test dei tratti della personalità dei Big 5, ottenere un file audio e molto altro.</p>
+	  <p class="lead">Benvenuto nel nostra webpage TexTool. Qui potrai eseguire una serie di azioni su un testo, ovvero la traduzione, analizzarlo grazie al test dei tratti della personalità dei Big 5, ottenere un file audio e molto altro.</p>
 	  <hr class="my-4">
 	  <p>Ti auguriamo una buona permanenza nel nostro sito, effettua il login qua sotto</p>
 	</div>
