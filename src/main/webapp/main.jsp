@@ -50,7 +50,7 @@
     <div class="col-sm-3">
       <h5>Analisi Sentimenti</h5>
       Effettua l'analisi del Big5, analizzando il testo sulle 5 dimensioni della personalità. Sono necessarie almeno <u>100 parole</u>.
-      <button class="btn btn-warning bottone" id="traduci" name="action" value="2">Analisi Big5</button>
+      <button class="btn btn-warning bottone" id="traduci" id="btnSent" name="action" value="2">Analisi Big5</button>
     </div>
     <div class="col-sm-3">
     	<h5>Language Understanding</h6>
@@ -58,7 +58,7 @@
 		- <u>Keywords</u>: restituisce parole chiave importanti nel contenuto.<br>
 		- <u>Entities</u>: identifica persone, città, organizzazioni, etc.<br>
 		- <u>Emotions</u>: fornisce una analisi dell'emozione per le entità trovate in precedenza.<br>
-		 <button class="btn btn-primary bottone" id="traduci" name="action" value="3">Understanding</button>
+		 <button class="btn btn-primary bottone" id="traduci" id="btnKey" name="action" value="3">Understanding</button>
     </div>
 	<div class="col-sm-3">
 	<h5>Scarica l'audio</h5>
