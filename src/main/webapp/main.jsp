@@ -37,7 +37,7 @@
 				  <option value="en">Inglese</option>
 				  <option value="it">Italiano</option>
 				  <option value="es">Spagnolo</option>
-				</select>
+				</select> 
 				<label for="exampleFormControlSelect1">Immetti la lingua destinazione:</label>
 				<select class="form-control" id="dest" name="dest">
 				  <option value="it">Italiano</option>
