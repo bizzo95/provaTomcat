@@ -1,5 +1,4 @@
 package asr.proyectoFinal.services;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,7 @@ public class Toni
 	public static ArrayList<String> getToni(String text)
 	{
 		IamOptions options = new IamOptions.Builder()
-				  .apiKey("eWMcVM3DeqfYckOaMNpy-urAgiFSzAyOPHT3KG3UsE5d")
+				  .apiKey("1TaN_tydzQHN6GPBEhikNOsrR2dieuJSLKUGO6jF_1gd")
 				  .build();
 
 				ToneAnalyzer toneAnalyzer = new ToneAnalyzer("2017-09-21", options);
@@ -47,19 +46,19 @@ public class Toni
 				
 			    UtteranceAnalysis utteranceAnalyses = toneAnalyzer.toneChat(toneChatOptions).execute().getUtterancesTone().get(0);
 			    String nombres = utteranceAnalyses.getUtteranceText();
+			    valToni.add(nombres);
+			    Double totaltone=0.0;
 			    //out.println(utteranceAnalyses.getUtteranceText()+"-->"+utteranceAnalyses.getTones());
+				for (ToneChatScore a:utteranceAnalyses.getTones()) {
+					totaltone+= a.getScore();
+				}
 				for (ToneChatScore a:utteranceAnalyses.getTones()) {
 					Double valoretone;
 					String nometone =a.getToneName();
-					
-					String rate= Double.toString(valoretone= a.getScore());
-					valToni.add(nombres);
+					String rate= Double.toString(Math.rint(valoretone= a.getScore()*100/totaltone));
 					valToni.add(nometone);
-					valToni.add(rate);
-					//valor.put(nombres, valToni);
-				}
-				
-				
+					valToni.add(rate);	
+				}	
 		return valToni;
 	}
 }

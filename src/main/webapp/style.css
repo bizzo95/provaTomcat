@@ -87,13 +87,25 @@ body {
 }
 
 #btnSent {
-	margin-top:105px,
+	margin-top:105px;
 }
 
 #btnKey {
 	margin-top:10px;
 }
 
-#tab {
+#tab-ent {
 	margin-top: 8px;
+}
+
+#tab-emo {
+	margin-top: 8px;
+}
+
+#tab-key {
+	margin-top: 8px;
+}
+
+#toneBar {
+	height: 25px
 }

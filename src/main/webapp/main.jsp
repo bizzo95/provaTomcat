@@ -14,6 +14,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="shortcut icon" href="italia.png" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -61,10 +64,7 @@
 		 <button class="btn btn-primary bottone" id="btnKey" name="action" value="3">Understanding</button>
     </div>
 	<div class="col-sm-3">
-	<h5>Scarica l'audio</h5>
-	Inserisci il nome del tuo file di testo e con un click troverai il tuo testo in formato audio sul tuo Desktop.
-	  <label>Nome file:</label>
-      <input type="text" name="name" class="form-control">
+	<h5>Analizza il tono</h5>
       <button class="btn btn-light bottone" id="traduci" name="action" value="4">Scarica audio</button>
     </div>
   </div>
@@ -113,7 +113,7 @@
 		 		
 	  			
 	  			
-				<div class="container-fluid tab" id="tab-ent" class="tab" style="display:none;">
+				<div class="container-fluid" id="tab-ent" class="tab" style="display:none;">
 					<% JsonArray entity = new JsonArray();
 					entity = risultato.get(1);
 					%>
@@ -136,7 +136,7 @@
 						</tr>
 							<%}%>
 					<%}else {%>
-						<tr><td>Nessuna entità trovata</td><td></td><td></td></tr>
+						<tr><td><b>Nessuna entità trovata</b></td><td></td><td></td></tr>
 					<%}%>			
 						</tbody>
 						</table>
@@ -146,7 +146,7 @@
 				<%JsonArray keywords = new JsonArray();
 				   keywords = risultato.get(0); %>
 				   
-				   <div class="container-fluid tab" id="tab-key" style="display:none;">
+				   <div class="container-fluid" id="tab-key" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
@@ -166,13 +166,13 @@
 					</tr>
 						<%}%>
 					<%}else {%>
-						<tr><td>Nessuna keywords trovata</td><td></td><td></td></tr>
+						<tr><td><b>Nessuna keywords trovata</b></td><td></td><td></td></tr>
 					<%}%>			
 					</tbody>
 					</table>				    
 				</div>
 				   
-				<div class="container-fluid tab" id="tab-emo" style="display:none;">
+				<div class="container-fluid" id="tab-emo" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
@@ -198,8 +198,48 @@
 				</div>
 					
 	  			<%break;
-	  		
-	  	}%>
+	  		case 4:
+	  			
+			      Toni tono = new Toni();
+			  			
+			  	  ArrayList<String> tones = new ArrayList<String>();
+		  		  tones= tono.getToni(text);
+		  		  //for(String a: tones) System.out.println(a);
+				  ArrayList<String> feelings=new ArrayList<String>();
+				  ArrayList<String> dati=new ArrayList<String>();
+				  int c=1;
+				  while(c<tones.size()-1){
+					  feelings.add(tones.get(c));
+					  c=c+2;  
+				  }
+				  c=2;
+				  while(c<tones.size()){
+					  dati.add(tones.get(c));
+					  c=c+2;  
+				  }
+				  c=0;
+				  %>
+				<% ArrayList<String> colores =new ArrayList<String>();
+				colores.add("success");
+				colores.add("warning");
+				colores.add("danger");
+				%>
+				
+				<div id="ris" class="container-fluid">
+				  <div class="progress" id="toneBar">
+				  <%for(c=0; c<feelings.size(); c++){%>
+				    <div class="progress-bar progress-bar-<%=colores.get(c)%>" role="progressbar" style="width:<%=dati.get(c)%>%">
+				      <%=feelings.get(c)%>
+				      (<%=dati.get(c)%>)
+				    </div>
+				    <%
+				}
+				%>
+				  </div>
+				</div>
+	  			
+	  			
+	  	<%}%>
 	    
 	    <script>
 			$("#loading").css("display","none");
