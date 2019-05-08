@@ -23,7 +23,7 @@
 <div id="container" class="container-fluid">
 <!--  <p>Benvenuto, ora puoi utilizzare tutti i tools a tua disposizione</p>-->
 
-<form action="main.jsp" method="GET">
+<form action="main.jsp" method="POST">
 <div class="form-group">
   <label for="comment"><h6>Texto:</h6></label>
   <textarea name="text" class="form-control" rows="5" id="comment"></textarea>
@@ -79,7 +79,7 @@
 		String param = request.getParameter("action");
 		int p = Integer.parseInt(param);
 		String text = request.getParameter("text");%>
-		<label for="comment">Resultado:</label>
+		<label for="comment"><h6>Resultado:</h6></label>
 		<script>
 			$("#comment").text("<%= text %>");
 			$("#loading").css("display","block");
@@ -220,43 +220,49 @@
 				  }
 				  c=0;
 				  int k=0;
-				  %>
 
-				  <div class="container">
-				    <h4><%=tones.get(0)%></h4>
-				    <div class="progress" >
-				    <%for(c=0; c<feelings.size(); c++){
-				    		if(k==0){%>
-				    			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#FF6633">
-				    	      <%=feelings.get(c)%>
-				    	      (<%=dati.get(c)%>)
-				    	    </div>
-				    		<%}
-				    		if(k==1){%>
-				    			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#6633FF">
-				    	      <%=feelings.get(c)%>
-				    	      (<%=dati.get(c)%>)
-				    	    </div>
-				    		<%}
-				    		if(k==2){%>
-				  			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:#CC0033">
-				  	      <%=feelings.get(c)%>
-				  	      (<%=dati.get(c)%>)
-				  	      <% k=0; %>
-				  	    </div>
-				  		<%}
-				    		if(k==2){%>
-				  		<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:##00CC99">
-				        	<%=feelings.get(c)%>
-				        	(<%=dati.get(c)%>)
-				        	<% k=0; %>
-				      	</div>
-				  		<%}
-				  k++;
-				  }
-				  %>
-				    </div>
-				  </div>
+				  if(tones.size()==1){%>
+						<div class="container">
+							<h4>Non è stato rilevato nessun tono prevalente</h4>
+						</div>
+					<%}else{%>
+					<div class="container">
+					  <div class="progress" >
+					  <%for(c=0; c<feelings.size(); c++){
+					  		if(k==0){%>
+					  			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#FF6633">
+					  	      <%=feelings.get(c)%>
+					  	      (<%=dati.get(c)%>)
+					  	    </div>
+					  		<%}
+					  		if(k==1){%>
+					  			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#6633FF">
+					  	      <%=feelings.get(c)%>
+					  	      (<%=dati.get(c)%>)
+					  	    </div>
+					  		<%}
+					  		if(k==2){%>
+								<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:#CC0033">
+						      <%=feelings.get(c)%>
+						      (<%=dati.get(c)%>)
+						      <% k=0; %>
+						    </div>
+							<%}
+					  		if(k==2){%>
+							<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:##00CC99">
+					      	<%=feelings.get(c)%>
+					      	(<%=dati.get(c)%>)
+					      	<% k=0; %>
+					    	</div>
+							<%}
+					k++;
+					}
+					%>
+					  </div>
+					</div>
+					<%
+					}
+					%>
 	  			
 	  			
 	  	<%}%>

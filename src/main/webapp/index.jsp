@@ -22,7 +22,7 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Operazione riuscita con successo</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">Operación exitosa</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -38,39 +38,39 @@
 	<div id="logo"><img id="logoimg" src="logo.png"></div>
 	<!--  Jumbotron spiegazione-->
 	<div id="jumbo" class="jumbotron">
-	  <h4 class="display-4">Buongiorno visitatore!</h4>
+	  <h4 class="display-4">Buenos días visitante!</h4>
 	  <p class="lead">Benvenuto nel nostra webpage TexTool. Qui potrai eseguire una serie di azioni su un testo, ovvero la traduzione, analizzarlo grazie al test dei tratti della personalità dei Big 5, ottenere un file audio e molto altro.</p>
 	  <hr class="my-4">
-	  <p>Ti auguriamo una buona permanenza nel nostro sito, effettua il login qua sotto</p>
+	  <p>Le deseamos una agradable estancia en nuestro sitio, inicie sesión abajo</p>
 	</div>
 	
 	<!--  Login -->
 	<div id="signin">
-		<h3>Effettua il login: </h3>
+		<h3>Inicie sesión: </h3>
 		<form action="log" method="POST">
 			<div class="form-group">
-				<label>Inserire username: </label><input class="form-control" type="text" name="username">
-				<label id="lbl2">Inserire password: </label><input class="form-control" type="password" name="password">
+				<label>Ingrese nombre de usuario: </label><input class="form-control" type="text" name="username">
+				<label id="lbl2">Introduzca la contraseña: </label><input class="form-control" type="password" name="password">
 				<p id="erroreCredErr" class="error"></p>
 			</div>
 			<button class="btn btn-primary" type="submit" >Login</button>
 		</form> 
 		<div>
-			<p>Non hai un account?<button type="button" id="btnSignUp" class="btn btn-link">Registrati!</button></p>
+			<p>¿No tienes una cuenta?<button type="button" id="btnSignUp" class="btn btn-link">Inscríbete!</button></p>
 		</div>
 	</div>
 	
 	<!--  Register -->
 	<div id="signup">
-	<h3>Registrati: </h3>
+	<h3>Registro: </h3>
 		<form action="add" method="POST" id="form">
 			<div class="form-group">
-				<label>Inserire username: </label>
+				<label>Ingrese nombre de usuario: </label>
 				<input class="form-control inp" type="text" name="username" id="usr"> <p class="error" id="errorusr"></p>
-				<label id="lbl">Inserire password (almeno 8 caratteri): </label><input id="psw" class="form-control inp" type="password" name="password" id="psw"> <p class="error" id="errorpsw1"></p>
-				<label id="lbl">Reinserire password: </label><input id="psw2" class="form-control inp" type="password" name="password2" id="psw2"> <p class="error" id="errorpsw2"></p>
+				<label id="lbl">Introduzca la contraseña (al menos 8 caracteres): </label><input id="psw" class="form-control inp" type="password" name="password" id="psw"> <p class="error" id="errorpsw1"></p>
+				<label id="lbl">Vuelva a ingresar la contraseña: </label><input id="psw2" class="form-control inp" type="password" name="password2" id="psw2"> <p class="error" id="errorpsw2"></p>
 			</div>
-			<button class="btn btn-primary" type="submit" value="Invia" id="invia" >Register</button>
+			<button class="btn btn-primary" type="submit" value="Invia" id="invia" >Registras</button>
 			<p id="p" class="error"></p>
 		</form>
 	 </div>
@@ -92,16 +92,16 @@ $(document).ready(function(){
       	
 		//Controllo parametri
 		
-		if (query=="e") $("#erroreCredErr").text("Credenziali errate!");
+		if (query=="e") $("#erroreCredErr").text("Credenciales incorrectas!");
 		if (query=="u"){ 
-			$("#errorusr").text("Utente esistente");
+			$("#errorusr").text("Usuario existente");
 			$("#signup").css("display", "block");
 			$("#signin").css("display", "none");
 		}
 		if (query.split("=")[0]=="n"){
 			$("#modal").trigger('click');
-			var str = "Utente ";
-			var res = str.concat(window.location.search.substring(1).split("=")[1], " registrato")
+			var str = "Usuario ";
+			var res = str.concat(window.location.search.substring(1).split("=")[1], " grabado")
 			$("#modal-body").text(res);
 		}
 				
@@ -110,12 +110,12 @@ $(document).ready(function(){
 		$("#psw").keyup(function(){
 		    if ($(this).val().length < 8) {
 				$("#errorpsw1").css('color', 'red')
-		    	$("#errorpsw1").text("Password troppo corta");
+		    	$("#errorpsw1").text("Contraseña demasiado corta");
 				
 		    	check1 = false;
 		    }
 		    else {
-		    	$("#errorpsw1").text("Perfetto");
+		    	$("#errorpsw1").text("Perfecto");
 				$("#errorpsw1").css('color', 'green')
 		    	check1 = true
 		    }
@@ -125,11 +125,11 @@ $(document).ready(function(){
 	  	$("#psw2").keyup(function(){
 		    if ($(this).val() != $("#psw").val()) {
 				$("#errorpsw2").css('color', 'red')
-		    	$("#errorpsw2").text("Password differenti");
+		    	$("#errorpsw2").text("Contraseñas diferentes");
 		    	check2 = false;
 		    }
 		    else {
-		    	$("#errorpsw2").text("Perfetto");
+		    	$("#errorpsw2").text("Perfecto");
 				$("#errorpsw2").css('color', 'green')
 		    	check2 = true
 		    }
@@ -148,7 +148,7 @@ $(document).ready(function(){
 			 }
 			 else {
 				 $(this).attr("disabled", true);
-				 $("#p").text("Compila tutti i campi correttamente! ");
+				 $("#p").text("Rellena todos los campos correctamente!");
 			 }
 	  	});  
 	  	
