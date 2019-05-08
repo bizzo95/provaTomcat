@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Italianos project</title>
+<title>Proyecto italiano</title>
 <script src="jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -37,15 +37,15 @@
 			<div class="form-group">
 				<label for="exampleFormControlSelect1">Insertas lengua naciente:</label>
 				<select class="form-control" id="source" name="source">	
-				  <option value="en">Inglese</option>
+				  <option value="en">Inglés</option>
 				  <option value="it">Italiano</option>
-				  <option value="es">Spagnolo</option>
+				  <option value="es">Español</option>
 				</select> 
 				<label for="exampleFormControlSelect1">Insertas lengua destino:</label>
 				<select class="form-control" id="dest" name="dest">
 				  <option value="it">Italiano</option>
-				  <option value="es">Spagnolo</option>
-				  <option value="fr">Francese</option>
+				  <option value="es">Español</option>
+				  <option value="fr">Francés</option>
 				</select>
 			</div>
 			<button class="btn btn-info bottone" id="traduci" name="action" value="1">Traducir</button>
@@ -286,21 +286,21 @@
 $( document ).ready(function() {
 	
 	$("#source").change(function(){
-		if ($("#source option:selected").text() == "Inglese") {
+		if ($("#source option:selected").text() == "Inglés") {
 			$("#dest").empty();
 			$("#dest").append(new Option("Italiano", "it"));
-			$("#dest").append(new Option("Spagnolo", "es"));
-			$("#dest").append(new Option("Francese", "fr"));
+			$("#dest").append(new Option("Español", "es"));
+			$("#dest").append(new Option("Francés", "fr"));
 		}
 		if ($("#source option:selected").text() == "Italiano") {
 				$("#dest").empty();
-				$("#dest").append(new Option("Inglese", "en"));
-				$("#dest").append(new Option("Tedesco", "de"));
+				$("#dest").append(new Option("Inglés", "en"));
+				$("#dest").append(new Option("Alemán", "de"));
 		}
-		if ($("#source option:selected").text() == "Spagnolo") {
+		if ($("#source option:selected").text() == "Español") {
 				$("#dest").empty();
-				$("#dest").append(new Option("Inglese", "en"));
-				$("#dest").append(new Option("Francese", "fr"));
+				$("#dest").append(new Option("Inglés", "en"));
+				$("#dest").append(new Option("Francés", "fr"));
 				$("#dest").append(new Option("Catalano", "ca"));
 		}
 	});
