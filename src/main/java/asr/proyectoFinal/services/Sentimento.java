@@ -40,7 +40,6 @@ public class Sentimento
 			double d = Double.parseDouble(new BigDecimal(rootObjPI.get("percentile").toString()).toPlainString()) * 100;
 			sentimenti.add(Double.toString(d));
 		}
-		System.out.println(sentimenti);
 		return sentimenti;
 	}
 }

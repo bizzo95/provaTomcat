@@ -50,7 +50,7 @@
     <div class="col-sm-3">
       <h5>Analisi Sentimenti</h5>
       Effettua l'analisi del Big5, analizzando il testo sulle 5 dimensioni della personalità. Sono necessarie almeno <u>100 parole</u>.
-      <button class="btn btn-warning bottone" id="traduci" id="btnSent" name="action" value="2">Analisi Big5</button>
+      <button class="btn btn-warning bottone" id="btnSent" name="action" value="2">Analisi Big5</button>
     </div>
     <div class="col-sm-3">
     	<h5>Language Understanding</h6>
@@ -58,7 +58,7 @@
 		- <u>Keywords</u>: restituisce parole chiave importanti nel contenuto.<br>
 		- <u>Entities</u>: identifica persone, città, organizzazioni, etc.<br>
 		- <u>Emotions</u>: fornisce una analisi dell'emozione per le entità trovate in precedenza.<br>
-		 <button class="btn btn-primary bottone" id="traduci" id="btnKey" name="action" value="3">Understanding</button>
+		 <button class="btn btn-primary bottone" id="btnKey" name="action" value="3">Understanding</button>
     </div>
 	<div class="col-sm-3">
 	<h5>Scarica l'audio</h5>
@@ -113,9 +113,9 @@
 		 		
 	  			
 	  			
-				<div class="container-fluid" id="tab-ent" style="display:none;">
+				<div class="container-fluid" id="tab-ent" class="tab" style="display:none;">
 					<% JsonArray entity = new JsonArray();
-					entity = risultato.get(1);	
+					entity = risultato.get(1);
 					%>
 					<table class="table table-striped">
 					<thead>
@@ -127,21 +127,26 @@
 					</thead>
 					<tbody>
 					<%
-					for(int j=0;j<entity.size();j++){%>
-					<tr>
-					<th scope="row"><%=(entity.get(j).getAsJsonObject().get("text").getAsString()) %></th>
-					<td><%=entity.get(j).getAsJsonObject().get("relevance").getAsString()%></td>
-					<td><%=entity.get(j).getAsJsonObject().get("sentiment").getAsJsonObject().get("score").getAsString()%></td>
-					</tr>
-						<%}%>			
-					</tbody>
-					</table>				    
+					if (entity.size()>0) {
+						for(int j=0;j<entity.size();j++){%>
+						<tr>
+						<th scope="row"><%=(entity.get(j).getAsJsonObject().get("text").getAsString()) %></th>
+						<td><%=entity.get(j).getAsJsonObject().get("relevance").getAsString()%></td>
+						<td><%=entity.get(j).getAsJsonObject().get("sentiment").getAsJsonObject().get("score").getAsString()%></td>
+						</tr>
+							<%}%>
+					<%}else {%>
+						<tr><td>Nessuna entità trovata</td><td></td><td></td></tr>
+					<%}%>			
+						</tbody>
+						</table>
+								    
 				</div>
 				
 				<%JsonArray keywords = new JsonArray();
 				   keywords = risultato.get(0); %>
 				   
-				   <div class="container-fluid" id="tab-key" style="display:none;">
+				   <div class="container-fluid" id="tab-key" class="tab" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
@@ -152,18 +157,22 @@
 					</thead>
 					<tbody>
 					<%
+					if (entity.size()>0) {
 					for(int k=0;k<keywords.size();k++){%>
 					<tr>
 					<th scope="row"><%=(keywords.get(k).getAsJsonObject().get("text").getAsString())%></th>
 					<td><%=keywords.get(k).getAsJsonObject().get("relevance").getAsString()%></td>
 					<td> <%=keywords.get(k).getAsJsonObject().get("sentiment").getAsJsonObject().get("score").getAsString()%></td>
 					</tr>
-						<%}%>			
+						<%}%>
+					<%}else {%>
+						<tr><td>Nessuna keywords trovata</td><td></td><td></td></tr>
+					<%}%>			
 					</tbody>
 					</table>				    
 				</div>
 				   
-				<div class="container-fluid" id="tab-emo" style="display:none;">
+				<div class="container-fluid" id="tab-emo" class="tab" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
@@ -179,10 +188,10 @@
 					<tr>
 					<th scope="row">Score</th>
 					<td><%=keywords.get(0).getAsJsonObject().get("emotion").getAsJsonObject().get("anger").getAsString()%></td>
-					<td><%=keywords.get(1).getAsJsonObject().get("emotion").getAsJsonObject().get("disgust").getAsString()%></td>
-					<td><%=keywords.get(2).getAsJsonObject().get("emotion").getAsJsonObject().get("fear").getAsString()%></td>
-					<td><%=keywords.get(3).getAsJsonObject().get("emotion").getAsJsonObject().get("joy").getAsString()%></td>
-					<td><%=keywords.get(4).getAsJsonObject().get("emotion").getAsJsonObject().get("sadness").getAsString()%></td>
+					<td><%=keywords.get(0).getAsJsonObject().get("emotion").getAsJsonObject().get("disgust").getAsString()%></td>
+					<td><%=keywords.get(0).getAsJsonObject().get("emotion").getAsJsonObject().get("fear").getAsString()%></td>
+					<td><%=keywords.get(0).getAsJsonObject().get("emotion").getAsJsonObject().get("joy").getAsString()%></td>
+					<td><%=keywords.get(0).getAsJsonObject().get("emotion").getAsJsonObject().get("sadness").getAsString()%></td>
 					</tr>			
 					</tbody>
 					</table>				    
@@ -190,11 +199,6 @@
 					
 	  			<%break;
 	  		
-	  		case 4:
-	  			String name = request.getParameter("name");
-	  			Audio aud = new Audio();%>
-	  			<div id="ris" class="container-fluid"> Il file <%=aud.getAudio(text, name) %> è stato staricato con successo sul Desktop</div>
-	  			<%break;
 	  	}%>
 	    
 	    <script>
