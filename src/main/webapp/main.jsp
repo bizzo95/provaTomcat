@@ -60,7 +60,7 @@
 	   	Efectúa el análisis del texto:<br>
 		<u>Keywords</u>: devuelve palabras llaves importantes del contenido.<br>
 		<u>Entities</u>: identifica personas, ciudad, organizaciones, etc..<br>
-		<u>Emotions</u>: provee un análisis de la emoción por las palabras clave encontradas en precedenci.<br>
+		<u>Emotions</u>: provee un análisis de la emoción por las palabras clave encontradas en precedencia.<br>
 		 <button class="btn btn-primary bottone" id="btnKey" name="action" value="3">Comprensión </button>
     </div>
 	<div class="col-sm-3">
