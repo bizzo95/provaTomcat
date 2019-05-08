@@ -90,6 +90,10 @@ body {
 	margin-top:105px;
 }
 
+#btnTone {
+	margin-top:106px;
+}
+
 #btnKey {
 	margin-top:10px;
 }
@@ -108,4 +112,8 @@ body {
 
 #toneBar {
 	height: 25px
+}
+
+#main {
+	text-align: center;
 }

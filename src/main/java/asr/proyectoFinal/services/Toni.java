@@ -45,6 +45,7 @@ public class Toni
 				
 				
 			    UtteranceAnalysis utteranceAnalyses = toneAnalyzer.toneChat(toneChatOptions).execute().getUtterancesTone().get(0);
+			    System.out.println("AAA" + utteranceAnalyses);
 			    String nombres = utteranceAnalyses.getUtteranceText();
 			    valToni.add(nombres);
 			    Double totaltone=0.0;
@@ -58,7 +59,8 @@ public class Toni
 					String rate= Double.toString(Math.rint(valoretone= a.getScore()*100/totaltone));
 					valToni.add(nometone);
 					valToni.add(rate);	
-				}	
+				}
+				System.out.println(totaltone);
 		return valToni;
 	}
 }

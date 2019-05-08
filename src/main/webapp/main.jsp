@@ -25,47 +25,48 @@
 
 <form action="main.jsp" method="GET">
 <div class="form-group">
-  <label for="comment">Testo:</label>
+  <label for="comment"><h6>Texto:</h6></label>
   <textarea name="text" class="form-control" rows="5" id="comment"></textarea>
 </div>
 
 
-<div class="container">
+<div class="container" id="main">
   <div class="row">
     <div class="col-sm-3" id="traduttore">
-		<h5>Traduttore</h5>
+		<h5>Traductor <span class="glyphicon glyphicon-text-size"></h5>
 			<div class="form-group">
-				<label for="exampleFormControlSelect1">Immetti la lingua sorgente:</label>
+				<label for="exampleFormControlSelect1">Insertas lengua naciente:</label>
 				<select class="form-control" id="source" name="source">	
 				  <option value="en">Inglese</option>
 				  <option value="it">Italiano</option>
 				  <option value="es">Spagnolo</option>
 				</select> 
-				<label for="exampleFormControlSelect1">Immetti la lingua destinazione:</label>
+				<label for="exampleFormControlSelect1">Insertas lengua destino:</label>
 				<select class="form-control" id="dest" name="dest">
 				  <option value="it">Italiano</option>
 				  <option value="es">Spagnolo</option>
 				  <option value="fr">Francese</option>
 				</select>
 			</div>
-			<button class="btn btn-info bottone" id="traduci" name="action" value="1">Traduci</button>
+			<button class="btn btn-info bottone" id="traduci" name="action" value="1">Traducir</button>
     </div>
     <div class="col-sm-3">
-      <h5>Analisi Sentimenti</h5>
-      Effettua l'analisi del Big5, analizzando il testo sulle 5 dimensioni della personalità. Sono necessarie almeno <u>100 parole</u>.
-      <button class="btn btn-warning bottone" id="btnSent" name="action" value="2">Analisi Big5</button>
+      <h5>Análisis sentimientos </h5>
+     Efectúa el análisis de los Big5, analizando el texto sobre las 5 dimensiones de la personalidad (Insertas al menos <u>100 palabras</u>)
+      <button class="btn btn-warning bottone" id="btnSent" name="action" value="2">Análisis de los Big5</button>
     </div>
     <div class="col-sm-3">
-    	<h5>Language Understanding</h6>
-	   	Effettua l'analisi dal testo:<br>
-		- <u>Keywords</u>: restituisce parole chiave importanti nel contenuto.<br>
-		- <u>Entities</u>: identifica persone, città, organizzazioni, etc.<br>
-		- <u>Emotions</u>: fornisce una analisi dell'emozione per le entità trovate in precedenza.<br>
-		 <button class="btn btn-primary bottone" id="btnKey" name="action" value="3">Understanding</button>
+    	<h5>Comprensión de lengua</h6>
+	   	Efectúa el análisis del texto:<br>
+		<u>Keywords</u>: devuelve palabras llaves importantes del contenido.<br>
+		<u>Entities</u>: identifica personas, ciudad, organizaciones, etc..<br>
+		<u>Emotions</u>: provee un análisis de la emoción por las palabras clave encontradas en precedenci.<br>
+		 <button class="btn btn-primary bottone" id="btnKey" name="action" value="3">Comprensión </button>
     </div>
 	<div class="col-sm-3">
-	<h5>Analizza il tono</h5>
-      <button class="btn btn-light bottone" id="traduci" name="action" value="4">Scarica audio</button>
+	<h5>Análisis de los tonos</h5>
+	Servicio que permite de analizar los tonos de una frase devolviendo los tonos más relevantes y explicándolos en porcentaje
+      <button class="btn btn-light bottone" id="btnTone" name="action" value="4">Tonos</button>
     </div>
   </div>
 </div>
@@ -73,12 +74,12 @@
 </form> 
 
 <div class="form-group" id="divRis">
-  <label for="comment"><h5>Risultato: </h5></label>
+  
 <% try {
 		String param = request.getParameter("action");
 		int p = Integer.parseInt(param);
 		String text = request.getParameter("text");%>
-		
+		<label for="comment">Resultado:</label>
 		<script>
 			$("#comment").text("<%= text %>");
 			$("#loading").css("display","block");
@@ -204,7 +205,7 @@
 			  			
 			  	  ArrayList<String> tones = new ArrayList<String>();
 		  		  tones= tono.getToni(text);
-		  		  //for(String a: tones) System.out.println(a);
+		  		  //System.out.println(tones);
 				  ArrayList<String> feelings=new ArrayList<String>();
 				  ArrayList<String> dati=new ArrayList<String>();
 				  int c=1;
@@ -218,25 +219,44 @@
 					  c=c+2;  
 				  }
 				  c=0;
+				  int k=0;
 				  %>
-				<% ArrayList<String> colores =new ArrayList<String>();
-				colores.add("success");
-				colores.add("warning");
-				colores.add("danger");
-				%>
-				
-				<div id="ris" class="container-fluid">
-				  <div class="progress" id="toneBar">
-				  <%for(c=0; c<feelings.size(); c++){%>
-				    <div class="progress-bar progress-bar-<%=colores.get(c)%>" role="progressbar" style="width:<%=dati.get(c)%>%">
-				      <%=feelings.get(c)%>
-				      (<%=dati.get(c)%>)
+
+				  <div class="container">
+				    <h4><%=tones.get(0)%></h4>
+				    <div class="progress" >
+				    <%for(c=0; c<feelings.size(); c++){
+				    		if(k==0){%>
+				    			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#FF6633">
+				    	      <%=feelings.get(c)%>
+				    	      (<%=dati.get(c)%>)
+				    	    </div>
+				    		<%}
+				    		if(k==1){%>
+				    			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%; background-color:#6633FF">
+				    	      <%=feelings.get(c)%>
+				    	      (<%=dati.get(c)%>)
+				    	    </div>
+				    		<%}
+				    		if(k==2){%>
+				  			<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:#CC0033">
+				  	      <%=feelings.get(c)%>
+				  	      (<%=dati.get(c)%>)
+				  	      <% k=0; %>
+				  	    </div>
+				  		<%}
+				    		if(k==2){%>
+				  		<div class="progress-bar " role="progressbar" style="width:<%=dati.get(c)%>%;  background-color:##00CC99">
+				        	<%=feelings.get(c)%>
+				        	(<%=dati.get(c)%>)
+				        	<% k=0; %>
+				      	</div>
+				  		<%}
+				  k++;
+				  }
+				  %>
 				    </div>
-				    <%
-				}
-				%>
 				  </div>
-				</div>
 	  			
 	  			
 	  	<%}%>
