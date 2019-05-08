@@ -113,7 +113,7 @@
 		 		
 	  			
 	  			
-				<div class="container-fluid" id="tab-ent" class="tab" style="display:none;">
+				<div class="container-fluid tab" id="tab-ent" class="tab" style="display:none;">
 					<% JsonArray entity = new JsonArray();
 					entity = risultato.get(1);
 					%>
@@ -146,7 +146,7 @@
 				<%JsonArray keywords = new JsonArray();
 				   keywords = risultato.get(0); %>
 				   
-				   <div class="container-fluid" id="tab-key" class="tab" style="display:none;">
+				   <div class="container-fluid tab" id="tab-key" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
@@ -172,7 +172,7 @@
 					</table>				    
 				</div>
 				   
-				<div class="container-fluid" id="tab-emo" class="tab" style="display:none;">
+				<div class="container-fluid tab" id="tab-emo" style="display:none;">
 					<table class="table table-striped">
 					<thead>
 					<tr>
