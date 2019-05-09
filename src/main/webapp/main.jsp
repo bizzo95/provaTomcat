@@ -137,7 +137,7 @@
 						</tr>
 							<%}%>
 					<%}else {%>
-						<tr><td><b>Nessuna entità trovata</b></td><td></td><td></td></tr>
+						<tr><td><b>No se encontraron entidades</b></td><td></td><td></td></tr>
 					<%}%>			
 						</tbody>
 						</table>
@@ -167,7 +167,7 @@
 					</tr>
 						<%}%>
 					<%}else {%>
-						<tr><td><b>Nessuna keywords trovata</b></td><td></td><td></td></tr>
+						<tr><td><b>No se encontraron palabras clave</b></td><td></td><td></td></tr>
 					<%}%>			
 					</tbody>
 					</table>				    
@@ -223,7 +223,7 @@
 
 				  if(tones.size()==1){%>
 						<div class="container">
-							<h4>Non è stato rilevato nessun tono prevalente</h4>
+							No se detectó ningún tono prevaleciente
 						</div>
 					<%}else{%>
 					<div class="container">
