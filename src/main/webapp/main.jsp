@@ -222,11 +222,11 @@
 				  int k=0;
 
 				  if(tones.size()==1){%>
-						<div class="container">
+						<div id="ris" class="container-fluid">
 							No se detectó ningún tono prevaleciente
 						</div>
 					<%}else{%>
-					<div class="container">
+					<div id="ris" class="container-fluid">
 					  <div class="progress" >
 					  <%for(c=0; c<feelings.size(); c++){
 					  		if(k==0){%>
